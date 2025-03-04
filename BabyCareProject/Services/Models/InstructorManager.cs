@@ -47,7 +47,7 @@ namespace BabyCareProject.Services.Models
         public async Task UpdateAsync(UpdateInstructorDto instructorDto)
         {
             var instructor = _mapper.Map<Instructor>(instructorDto);
-            await _instructorCollection.FindOneAndReplaceAsync(i => i.Id.Equals(instructor.Id), instructor);are
+            await _instructorCollection.FindOneAndReplaceAsync(i => i.Id.Equals(instructor.Id), instructor);
         }
     }
 }
