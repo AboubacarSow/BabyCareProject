@@ -1,0 +1,22 @@
+﻿@model CreateInstructorDto
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Eğitmen Ekleme</h1>
+
+<form method="post">
+    <label class="form-label">Profil Resmi</label>
+    <input type="text" asp-for="@Model.ImageUrl" class="form-control"/>
+    <br />
+    <label class="form-label">Ad</label>
+    <input type="text" class="form-control" asp-for="@Model.FirstName" />
+    <br />
+     <label class="form-label">Soyad</label>
+    <input type="text" class="form-control" asp-for="@Model.LastName" />
+    <br />
+     <label class="form-label">Başlık</label>
+    <input type="text" class="form-control" asp-for="@Model.Title" />
+    <button class="btn btn-primary"  type="submit">Kaydet</button>
+</form>
+

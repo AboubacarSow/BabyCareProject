@@ -1,5 +1,8 @@
 using BabyCareProject.Repositories.Settings;
+using BabyCareProject.Services.Contracts;
+using BabyCareProject.Services.Models;
 using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace BabyCareProject
 {
@@ -16,7 +19,8 @@ namespace BabyCareProject
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddScoped<IInstructorService, InstructorManager>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,7 +37,11 @@ namespace BabyCareProject
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapControllerRoute(
+              name: "areas",
+              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

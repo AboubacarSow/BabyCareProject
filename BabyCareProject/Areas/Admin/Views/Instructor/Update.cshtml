@@ -1,0 +1,25 @@
+﻿@model UpdateInstructorDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Eğitmen Güncelleme</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Id" />
+    <label class="form-label">Profil Resmi</label>
+    <input type="text" asp-for="@Model.ImageUrl" />
+    <br />
+    <label class="form-label">Ad</label>
+    <input type="text" class="form-control" asp-for="@Model.FirstName" />
+    <br />
+    <label class="form-label">Soyad</label>
+    <input type="text" class="form-control" asp-for="@Model.LastName" />
+    <br />
+    <label class="form-label">Başlık</label>
+    <input type="text" class="form-control" asp-for="@Model.Title" />
+    <br />
+    <button class="btn btn-primary" type="submit">Güncelle</button>
+</form>
+
+

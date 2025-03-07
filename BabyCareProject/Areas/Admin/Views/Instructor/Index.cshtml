@@ -1,0 +1,39 @@
+﻿@model List<ResultInstructorDto>
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<h3>Eğitmenler</h3>
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>Profil Resimi</th>
+            <th>Ad Soyad</th>
+            <th>Unvan</th>
+            <th>Işlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var instructor in Model)
+        {
+            count++;
+            <tr>
+                <th>@count</th>
+                <td><img src="@instructor.ImageUrl" style="width:75px;height:75px; border-radius:50%"/></td>
+                <td>@instructor.FullName</td>
+                <td>@instructor.Title</td>
+                <td>
+                    <a asp-action="Delete" asp-controller="Instructor" asp-route-id="@instructor.Id" asp-area="Admin" class="btn btn-danger">Sil</a>
+                    <a asp-action="Update" asp-controller="Instructor" asp-route-id="@instructor.Id" asp-area="Admin" class="btn btn-success">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+<a asp-action="Create" asp-controller="Instructor" asp-area="Admin" class="btn btn-outline-primary">Ekle</a>
