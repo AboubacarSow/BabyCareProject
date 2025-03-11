@@ -1,0 +1,24 @@
+﻿@model CreateProdutDto
+@{
+    ViewData["Title"] = "Create";
+}
+<h5>Product Ekleme</h5>
+<form method="post">
+    <label class="form-label">Ürün Resmi</label>
+    <input type="text" asp-for="@Model.ImageUrl" class="form-control" />
+    <br />
+    <label class="form-label">Başlık</label>
+    <input type="text" class="form-control" asp-for="@Model.Title" />
+    <br />
+    <label class="form-label">Açıklama</label>
+    <input type="text" class="form-control" asp-for="@Model.Description" />
+    <br />
+    <label class="form-label">Fiyat</label>
+    <input type="text" class="form-control" asp-for="@Model.Price" />
+    <br />
+    <label class="form-label">Eğitmen</label>
+    @Html.DropDownListFor(prop=>prop.InstructorName, (List<SelectListItem>)ViewBag.Teachers, new {@class="form-control"})
+        <br />
+    <button class="btn btn-primary" type="submit">Kaydet</button>
+</form>
+

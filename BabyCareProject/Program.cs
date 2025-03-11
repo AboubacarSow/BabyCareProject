@@ -21,6 +21,7 @@ namespace BabyCareProject
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.AddScoped<IInstructorService, InstructorManager>();
+            builder.Services.AddScoped<IProductService, ProductManager>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
