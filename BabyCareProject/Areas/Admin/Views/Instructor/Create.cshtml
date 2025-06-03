@@ -1,22 +1,36 @@
 ﻿@model CreateInstructorDto
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Eğitmen Ekleme";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Eğitmen Ekleme</h1>
+<div class="container top-entete">
+    <div class="d-flex justify-content-center">
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary" style="line-height:15px"><i class="fa-solid fa-plus me-2"></i>Eğitmen Ekleme İşlemi </h4>
+        </div>
+    </div>
+</div>
+<div class="container formulaire mt-3">
+    <form method="post" enctype="multipart/form-data">
+        <label class="form-label fw-bold">Profil Resmi</label>
+        <input type="file" asp-for="@Model.ImageUrl" class="form-control"/>
+        <br />
+        <label class="form-label fw-bold">Ad</label>
+        <input type="text" class="form-control" asp-for="@Model.FirstName" />
+        <br />
+         <label class="form-label">Soyad</label>
+        <input type="text" class="form-control" asp-for="@Model.LastName" />
+        <br />
+        <label class="form-label fw-bold">Başlık</label>
+        <input type="text" class="form-control" asp-for="@Model.Title" /><br /> <br />
+        <div class="d-flex justify-content-center">
+        <button class="btn btn-primary"  type="submit">
+            <i class="fa-solid fa-plus me-1"></i>
+            Kaydet</button>
 
-<form method="post">
-    <label class="form-label">Profil Resmi</label>
-    <input type="text" asp-for="@Model.ImageUrl" class="form-control"/>
-    <br />
-    <label class="form-label">Ad</label>
-    <input type="text" class="form-control" asp-for="@Model.FirstName" />
-    <br />
-     <label class="form-label">Soyad</label>
-    <input type="text" class="form-control" asp-for="@Model.LastName" />
-    <br />
-     <label class="form-label">Başlık</label>
-    <input type="text" class="form-control" asp-for="@Model.Title" />
-    <button class="btn btn-primary"  type="submit">Kaydet</button>
-</form>
+        </div>
+    </form>
+
+</div>
 

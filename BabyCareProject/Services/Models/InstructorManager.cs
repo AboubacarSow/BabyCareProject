@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BabyCareProject.Dtos.InstructorDtos;
+using BabyCareProject.Infrastructure.Utilities;
 using BabyCareProject.Repositories.Entities;
 using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
@@ -12,6 +13,7 @@ namespace BabyCareProject.Services.Models
     {
         private readonly IMongoCollection<Instructor> _instructorCollection;
         private readonly IMapper _mapper;
+        
 
         public InstructorManager(IMapper mapper,IDataBaseSettings dataBaseSettings)
         {
@@ -23,6 +25,7 @@ namespace BabyCareProject.Services.Models
 
         public async Task CreateAsync(CreateInstructorDto instructorDto)
         {
+            instructorDto.ImageUrl = await Media.UploadAsync(instructorDto.ImageFile);
             var instructor = _mapper.Map<Instructor>(instructorDto);
             await _instructorCollection.InsertOneAsync(instructor);
         }
@@ -46,6 +49,7 @@ namespace BabyCareProject.Services.Models
 
         public async Task UpdateAsync(UpdateInstructorDto instructorDto)
         {
+            instructorDto.ImageUrl = await Media.UploadAsync(instructorDto.ImageFile);
             var instructor = _mapper.Map<Instructor>(instructorDto);
             await _instructorCollection.FindOneAndReplaceAsync(i => i.Id.Equals(instructor.Id), instructor);
         }

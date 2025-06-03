@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BabyCareProject.Dtos.ProductDtos;
+﻿using BabyCareProject.Dtos.ProductDtos;
 using BabyCareProject.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -33,8 +32,9 @@ namespace BabyCareProject.Areas.Admin.Controllers
             _productServie.CreateAsync(productDto);
             return RedirectToAction("Index");
         }
+        [Route("Admin/Product/Update/{id}")]
         [HttpGet]
-        public async Task<IActionResult> Update(string id)
+        public async Task<IActionResult> Update([FromRoute] string id)
         {
             var product =await _productServie.GetByIdAsync(id);
             await GetTeachers();

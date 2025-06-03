@@ -20,7 +20,7 @@ namespace BabyCareProject.Areas.Admin.Controllers
             var results =await  _instructorService.GetAllAsync();
             return View(results);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -31,7 +31,9 @@ namespace BabyCareProject.Areas.Admin.Controllers
             await _instructorService.CreateAsync(instructorDto);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Update(string id)
+        
+        [HttpGet]
+        public async Task<IActionResult> Update([FromRoute]string id)
         {
             var model = await _instructorService.GetByIdAsync(id);
             return View(model);

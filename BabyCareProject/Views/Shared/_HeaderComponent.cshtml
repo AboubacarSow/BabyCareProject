@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<header class="pt-2 px-3">
+    @if (ViewData["Entete"]?.ToString() != string.Empty && ViewData["Entete"]?.ToString()!=" ")
+    {
+        <div class="container top-entete">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <h4 class="text-primary" style="line-height:15px"><i class="fa-solid fa-table-list me-4"></i>@ViewData["Entete"]ler </h4>
+                </div>
+                @if (ViewData["create"]?.ToString() != string.Empty)
+                {
+                    <a href="@ViewData["create"]" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-plus me-1"></i>Yeni @ViewData["Entete"] Ekle
+                    </a>
+                }
+            </div>
+        </div>
+
+    }
+    
+
+</header>

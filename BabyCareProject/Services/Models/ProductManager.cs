@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BabyCareProject.Dtos.ProductDtos;
+using BabyCareProject.Infrastructure.Utilities;
 using BabyCareProject.Repositories.Entities;
 using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
@@ -22,6 +23,7 @@ namespace BabyCareProject.Services.Models
         }
         public async Task CreateAsync(CreateProdutDto productDto)
         {
+            productDto.ImageUrl = await Media.UploadAsync(productDto.ImageFile);
             var product = _mapper.Map<Product>(productDto);
             await _productCollection.InsertOneAsync(product);
         }
@@ -45,6 +47,7 @@ namespace BabyCareProject.Services.Models
 
         public async Task UpdateAsync(UpdateProductDto productDto)
         {
+            productDto.ImageUrl =await Media.UploadAsync(productDto.ImageFile);
             var product = _mapper.Map<Product>(productDto);
             await _productCollection.FindOneAndReplaceAsync(p=>p.Id==product.Id,product);
         }
