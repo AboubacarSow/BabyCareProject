@@ -23,8 +23,8 @@
     <thead class="rounded-3 tableau-header">
         <tr>
             <th>N°</th>
-            <th>Ders Görseli</th>
-            <th>Ders Adı</th>
+            <th> Görseli</th>
+            <th> Adı</th>
             <th>Açıklama</th>
             <th>Eğitmen</th>
             <th>Ücret</th>
@@ -38,11 +38,11 @@
             <tr>
                 <th>@count</th>
                 <td><img src="@product.ImageUrl" style="width:75px;height:75px; border-radius:50%" /></td>
-                <td>@product.Title</td>
+                <td class="text-primary">@product.Title</td>
                 <td>@product.Description</td>
-                <td>@product.InstructorName</td>
-                <td>@product.Price</td>
-                <td >
+                <td class="text-nowrap text-primary">@product.InstructorName</td>
+                <td class="text-nowrap fw-bold">@product.Price ₺</td>
+                <td class="text-nowrap">
                     <div>
                         <a href="/Admin/Product/Delete/@product.Id" class="btn btn-outline-danger">
                             <i class="fa-solid fa-trash me-1"></i>
