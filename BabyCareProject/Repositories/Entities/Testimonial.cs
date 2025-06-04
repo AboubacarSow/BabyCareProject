@@ -3,15 +3,14 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BabyCareProject.Repositories.Entities;
 
-public class Instructor
+public class Testimonial
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
-
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string ImageUrl { get; set; }
+    public string FullName {  get; set; }   
+    public string ImageUrl {  get; set; }   
+    public string Comment {  get; set; }    
     public string Title { get; set; }
-    public List<SocialMedia> SocialMedia { get; set; } = new List<SocialMedia>();
+    public string Rate {  get; set; }   
 }

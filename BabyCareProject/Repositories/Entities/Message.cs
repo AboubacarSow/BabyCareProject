@@ -3,16 +3,14 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BabyCareProject.Repositories.Entities;
 
-public class Contact
+public class Message 
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id {  get; set; } 
-    public string Adderess { get; set; }
+    public string Id { get; set; }
+    public string FullName { get;set; }
     public string Email { get; set; }
-    public string Tel { get; set; }
-    public string MapUrl { get; set; }
-
+    public string Body { get; set; }
 }
 
 
