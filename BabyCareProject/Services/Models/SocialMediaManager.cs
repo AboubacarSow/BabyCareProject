@@ -1,32 +1,52 @@
-﻿using BabyCareProject.Dtos.SocialMediaDtos;
+﻿using AutoMapper;
+using BabyCareProject.Dtos.SocialMediaDtos;
+using BabyCareProject.Repositories.Entities;
+using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace BabyCareProject.Services.Models;
 
 public class SocialMediaManager : ISocialMediaService
 {
-    public Task CreateAsync(CreateSocialMediaDto socialMediaDto)
+    private readonly IMongoCollection<SocialMedia> _socialMediaCollection;
+    private readonly IMapper _mapper;
+
+    public SocialMediaManager(IMapper mapper, IDataBaseSettings dataBaseSettings)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
+        var client=new MongoClient(dataBaseSettings.ConnectionStrings);
+        var database = client.GetDatabase(dataBaseSettings.DataBaseName);
+        _socialMediaCollection=database.GetCollection<SocialMedia>(dataBaseSettings.SocialMediaCollection);
+    }
+    public async Task CreateAsync(CreateSocialMediaDto socialMediaDto)
+    {
+        var socialMedia= _mapper.Map<SocialMedia>(socialMediaDto);
+        await _socialMediaCollection.InsertOneAsync(socialMedia);   
     }
 
-    public Task DeleteAsync(string id)
+    public async Task DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        await _socialMediaCollection.DeleteOneAsync(id);
     }
 
-    public Task<List<ResultSocialMediaDto>> GetAllAsync()
+    public async Task<List<ResultSocialMediaDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var socials = await _socialMediaCollection.AsQueryable().ToListAsync();
+        return _mapper.Map<List<ResultSocialMediaDto>>(socials);
     }
 
-    public Task<UpdateSocialMediaDto> GetByIdAsync(string id)
+    public async Task<UpdateSocialMediaDto> GetByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        var social=await _socialMediaCollection.Find(s=>s.Id==id).FirstOrDefaultAsync();
+        return _mapper.Map<UpdateSocialMediaDto>(social);
     }
 
-    public Task UpdateAsync(UpdateSocialMediaDto socialMediaDto)
+    public async Task UpdateAsync(UpdateSocialMediaDto socialMediaDto)
     {
-        throw new NotImplementedException();
+        var social= _mapper.Map<SocialMedia>(socialMediaDto);
+        await _socialMediaCollection.FindOneAndReplaceAsync(s => s.Id == social.Id, social);
+
     }
 }

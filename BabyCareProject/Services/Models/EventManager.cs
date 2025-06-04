@@ -1,33 +1,56 @@
-﻿using BabyCareProject.Dtos.EventDtos;
+﻿using AutoMapper;
+using BabyCareProject.Dtos.EventDtos;
+using BabyCareProject.Infrastructure.Utilities;
+using BabyCareProject.Repositories.Entities;
+using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace BabyCareProject.Services.Models
 {
     public class EventManager : IEventService
     {
-        public Task CreateAsync(CreateEventDto eventDto)
+        private readonly IMongoCollection<Event> _eventCollection;
+        private readonly IMapper _mapper;
+        public EventManager(IMapper mapper, IDataBaseSettings dataBaseSettings)
         {
-            throw new NotImplementedException();
+            var client = new MongoClient(dataBaseSettings.ConnectionStrings);
+            var database = client.GetDatabase(dataBaseSettings.DataBaseName);
+            _eventCollection = database.GetCollection<Event>(dataBaseSettings.EventCollection);
+            _mapper = mapper;
+        }
+        public async Task CreateAsync(CreateEventDto eventDto)
+        {
+            eventDto.ImageUrl = await Media.UploadAsync(eventDto.ImageFile);
+            var _event = _mapper.Map<Event>(eventDto);
+            await _eventCollection.InsertOneAsync(_event);
         }
 
-        public Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            await _eventCollection.DeleteOneAsync(id);
         }
 
-        public Task<List<ResultEventDto>> GetAllAsync()
+        public async Task<List<ResultEventDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var events = await _eventCollection.AsQueryable().ToListAsync();
+            return _mapper.Map<List<ResultEventDto>>(events);
         }
 
-        public Task<UpdateEventDto> GetByIdAsync(string id)
+        public async Task<UpdateEventDto> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var _event = await _eventCollection.Find(c => c.Id == id).FirstOrDefaultAsync();
+            return _mapper.Map<UpdateEventDto>(_event);
         }
 
-        public Task UpdateAsync(UpdateEventDto eventDto)
+        public async Task UpdateAsync(UpdateEventDto eventDto)
         {
-            throw new NotImplementedException();
+            eventDto.ImageUrl = await Media.UploadAsync(eventDto.ImageFile);
+            var _event = _mapper.Map<Event>(eventDto);
+            await _eventCollection.FindOneAndReplaceAsync(c => c.Id == _event.Id, _event);
+
         }
+        
     }
 }

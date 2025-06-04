@@ -12,4 +12,5 @@ public interface IServiceManager
     IHizmetService HizmetService {  get; }
     ISocialMediaService SocialMediaService { get; }
     ISubscriberService SubscriberService { get; }
+    ITestimonialService TestimonialService { get; }
 }

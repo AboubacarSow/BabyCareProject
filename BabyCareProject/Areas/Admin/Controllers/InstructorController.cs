@@ -6,18 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace BabyCareProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class InstructorController : Controller
+    public class InstructorController(IServiceManager manager) : Controller
     {
-        private readonly IInstructorService _instructorService;
-
-        public InstructorController(IInstructorService instructorService)
-        {
-            _instructorService = instructorService;
-        }
+        private readonly IServiceManager _manager = manager;
 
         public async Task<IActionResult> Index()
         {
-            var results =await  _instructorService.GetAllAsync();
+            var results =await  _manager.InstructorService.GetAllAsync();
             return View(results);
         }
         [HttpGet]
@@ -28,27 +23,27 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateInstructorDto instructorDto)
         {
-            await _instructorService.CreateAsync(instructorDto);
+            await _manager.InstructorService.CreateAsync(instructorDto);
             return RedirectToAction("Index");
         }
         
         [HttpGet]
         public async Task<IActionResult> Update([FromRoute]string id)
         {
-            var model = await _instructorService.GetByIdAsync(id);
+            var model = await _manager.InstructorService.GetByIdAsync(id);
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateInstructorDto instructorDto)
         {
-            await _instructorService.UpdateAsync(instructorDto);
+            await _manager.InstructorService.UpdateAsync(instructorDto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(string id)
         {
-            await _instructorService.DeleteAsync(id);
+            await _manager.InstructorService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
     }

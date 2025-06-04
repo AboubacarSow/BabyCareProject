@@ -1,32 +1,46 @@
-﻿using BabyCareProject.Dtos.MessageDtos;
+﻿using AutoMapper;
+using BabyCareProject.Dtos.MessageDtos;
+using BabyCareProject.Dtos.ServiceDtos;
+using BabyCareProject.Repositories.Entities;
+using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace BabyCareProject.Services.Models;
-
 public class MessageManager : IMessageService
 {
-    public Task CreateAsync(CreateMessageDto messageDto)
+    private readonly IMongoCollection<Message> _messageCollection;
+    private readonly IMapper _mapper;
+    public MessageManager(IMapper mapper, IDataBaseSettings dataBaseSettings)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
+        var client = new MongoClient(dataBaseSettings.ConnectionStrings);
+        var database = client.GetDatabase(dataBaseSettings.DataBaseName);
+        _messageCollection = database.GetCollection<Message>(dataBaseSettings.MessageCollection);
     }
-
-    public Task DeleteAsync(string id)
+    public async Task CreateAsync(CreateMessageDto messageDto)
     {
-        throw new NotImplementedException();
+        var message = _mapper.Map<Message>(messageDto);
+        await _messageCollection.InsertOneAsync(message);
     }
-
-    public Task<List<ResultMessageDto>> GetAllAsync()
+    public async Task DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        await _messageCollection.DeleteOneAsync(id);
     }
-
-    public Task<UpdateMessageDto> GetByIdAsync(string id)
+    public async Task<List<ResultMessageDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var messages = await _messageCollection.AsQueryable().ToListAsync();
+        return _mapper.Map<List<ResultMessageDto>>(messages);
     }
-
-    public Task UpdateAsync(UpdateMessageDto messageDto)
+    public async Task<UpdateMessageDto> GetByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        var message = await _messageCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
+        return _mapper.Map<UpdateMessageDto>(message);
+    }
+    public async Task UpdateAsync(UpdateMessageDto messageDto)
+    {
+        var message = _mapper.Map<Message>(messageDto);
+        await _messageCollection.FindOneAndReplaceAsync(s => s.Id == message.Id, message);
     }
 }

@@ -1,33 +1,53 @@
-﻿using BabyCareProject.Dtos.SubscriberDtos;
+﻿using AutoMapper;
+using BabyCareProject.Dtos.SocialMediaDtos;
+using BabyCareProject.Dtos.SubscriberDtos;
+using BabyCareProject.Repositories.Entities;
+using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace BabyCareProject.Services.Models;
 
 public class SubscriberManager : ISubscriberService
 {
-    public Task CreateAsync(CreateSubscriberDto subscriberDto)
+    private readonly IMongoCollection<Subscriber> _subscriberCollection;
+    private readonly IMapper _mapper;
+
+    public SubscriberManager(IMapper mapper, IDataBaseSettings dataBaseSettings)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
+        var client = new MongoClient(dataBaseSettings.ConnectionStrings);
+        var database = client.GetDatabase(dataBaseSettings.DataBaseName);
+        _subscriberCollection = database.GetCollection<Subscriber>(dataBaseSettings.SubscriberCollection);
+    }
+    public async Task CreateAsync(CreateSubscriberDto subscriberDto)
+    {
+        var subscriber = _mapper.Map<Subscriber>(subscriberDto);
+        await _subscriberCollection.InsertOneAsync(subscriber);
     }
 
-    public Task DeleteAsync(string id)
+    public async Task DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        await _subscriberCollection.DeleteOneAsync(id);
     }
 
-    public Task<List<ResultSubscriberDto>> GetAllAsync()
+    public async Task<List<ResultSubscriberDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var subscribers = await _subscriberCollection.AsQueryable().ToListAsync();
+        return _mapper.Map<List<ResultSubscriberDto>>(subscribers);
     }
 
-    public Task<UpdateSubscriberDto> GetByIdAsync(string id)
+    public async Task<UpdateSubscriberDto> GetByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        var subscriber = await _subscriberCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
+        return _mapper.Map<UpdateSubscriberDto>(subscriber);
     }
 
-    public Task UpdateAsync(UpdateSubscriberDto subscriberDto)
+    public async Task UpdateAsync(UpdateSubscriberDto subscriberDto)
     {
-        throw new NotImplementedException();
+        var social = _mapper.Map<Subscriber>(subscriberDto);
+        await _subscriberCollection.FindOneAndReplaceAsync(s => s.Id == social.Id, social);
+
     }
 }

@@ -1,32 +1,49 @@
-﻿using BabyCareProject.Dtos.ServiceDtos;
+﻿using AutoMapper;
+using BabyCareProject.Dtos.ServiceDtos;
+using BabyCareProject.Repositories.Entities;
+using BabyCareProject.Repositories.Settings;
 using BabyCareProject.Services.Contracts;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace BabyCareProject.Services.Models;
-
 public class HizmetManager : IHizmetService
 {
-    public Task CreateAsync(CreateServiceDto servicDto)
+    private readonly IMongoCollection<Service> _serviceCollection;
+    private readonly IMapper _mapper;
+    public HizmetManager(IMapper mapper,IDataBaseSettings dataBaseSettings)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
+        var client = new MongoClient(dataBaseSettings.ConnectionStrings);
+        var database=client.GetDatabase(dataBaseSettings.DataBaseName);
+        _serviceCollection = database.GetCollection<Service>(dataBaseSettings.ServiceCollection);
+    }
+    public async Task CreateAsync(CreateServiceDto servicDto)
+    {
+        var service=_mapper.Map<Service>(servicDto);    
+        await _serviceCollection.InsertOneAsync(service);   
     }
 
-    public Task DeleteAsync(string id)
+    public async Task DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        await _serviceCollection.DeleteOneAsync(id);    
     }
 
-    public Task<List<ResultServiceDto>> GetAllAsync()
+    public async Task<List<ResultServiceDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var services = await _serviceCollection.AsQueryable().ToListAsync();
+        return _mapper.Map<List<ResultServiceDto>>(services);
     }
 
-    public Task<UpdateServiceDto> GetByIdAsync(string id)
+    public async Task<UpdateServiceDto> GetByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        var service = await _serviceCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
+        return _mapper.Map<UpdateServiceDto>(service);  
     }
 
-    public Task UpdateAsync(UpdateServiceDto serviceDto)
+    public async Task UpdateAsync(UpdateServiceDto serviceDto)
     {
-        throw new NotImplementedException();
+        var service = _mapper.Map<Service>(serviceDto);
+        await _serviceCollection.FindOneAndReplaceAsync(s=>s.Id==service.Id, service);
     }
 }

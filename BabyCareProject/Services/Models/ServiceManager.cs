@@ -1,26 +1,48 @@
 ﻿using BabyCareProject.Services.Contracts;
 
 namespace BabyCareProject.Services.Models;
-
 public class ServiceManager : IServiceManager
 {
-    public IAboutService AboutService => throw new NotImplementedException();
+    private readonly IAboutService _aboutService;
+    private readonly IContactService _contactService;
+    private readonly IEventService _eventService;
+    private readonly IGalleryService _galleryService;
+    private readonly IInstructorService _instructorService;
+    private readonly IMessageService _messageService;
+    private readonly IProductService _productService;
+    private readonly IHizmetService _hizmetService;
+    private readonly ISocialMediaService _socialMediaService;
+    private readonly ISubscriberService _subscriberService;
+    private readonly ITestimonialService _testimonialService;
 
-    public IContactService ContactService => throw new NotImplementedException();
-
-    public IEventService EventService => throw new NotImplementedException();
-
-    public IGalleryService GalleryService => throw new NotImplementedException();
-
-    public IInstructorService InstructorService => throw new NotImplementedException();
-
-    public IMessageService MessageService => throw new NotImplementedException();
-
-    public IProductService ProductService => throw new NotImplementedException();
-
-    public IHizmetService HizmetService => throw new NotImplementedException();
-
-    public ISocialMediaService SocialMediaService => throw new NotImplementedException();
-
-    public ISubscriberService SubscriberService => throw new NotImplementedException();
+    public ServiceManager(IAboutService aboutService, IContactService contactService,
+        IEventService eventService, IGalleryService galleryService,
+        IInstructorService instructorService, IMessageService messageService,
+        IProductService productService, IHizmetService hizmetService,
+        ISocialMediaService socialMediaService, ISubscriberService subscriberService,
+        ITestimonialService testimonialService)
+    {
+        _aboutService = aboutService;
+        _contactService = contactService;
+        _eventService = eventService;
+        _galleryService = galleryService;
+        _instructorService = instructorService;
+        _messageService = messageService;
+        _productService = productService;
+        _hizmetService = hizmetService;
+        _socialMediaService = socialMediaService;
+        _subscriberService = subscriberService;
+        _testimonialService = testimonialService;
+    }
+    public IAboutService AboutService => _aboutService;
+    public IContactService ContactService => _contactService;
+    public IEventService EventService => _eventService;
+    public IGalleryService GalleryService => _galleryService;
+    public IInstructorService InstructorService => _instructorService;
+    public IMessageService MessageService => _messageService;
+    public IProductService ProductService => _productService;
+    public IHizmetService HizmetService => _hizmetService;
+    public ISocialMediaService SocialMediaService => _socialMediaService;
+    public ISubscriberService SubscriberService => _subscriberService;
+    public ITestimonialService TestimonialService => _testimonialService;
 }
