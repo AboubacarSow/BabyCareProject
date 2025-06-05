@@ -29,7 +29,7 @@ public class SubscriberManager : ISubscriberService
 
     public async Task DeleteAsync(string id)
     {
-        await _subscriberCollection.DeleteOneAsync(id);
+        await _subscriberCollection.DeleteOneAsync(s => s.Id == id);
     }
 
     public async Task<List<ResultSubscriberDto>> GetAllAsync()
@@ -38,16 +38,5 @@ public class SubscriberManager : ISubscriberService
         return _mapper.Map<List<ResultSubscriberDto>>(subscribers);
     }
 
-    public async Task<UpdateSubscriberDto> GetByIdAsync(string id)
-    {
-        var subscriber = await _subscriberCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
-        return _mapper.Map<UpdateSubscriberDto>(subscriber);
-    }
-
-    public async Task UpdateAsync(UpdateSubscriberDto subscriberDto)
-    {
-        var social = _mapper.Map<Subscriber>(subscriberDto);
-        await _subscriberCollection.FindOneAndReplaceAsync(s => s.Id == social.Id, social);
-
-    }
+    
 }

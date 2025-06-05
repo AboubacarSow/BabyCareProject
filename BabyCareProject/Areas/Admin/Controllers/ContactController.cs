@@ -25,18 +25,17 @@ public class ContactController(IServiceManager _manager) : Controller
         return RedirectToAction(nameof(Index));
     }
     [HttpGet]
-    public async Task<IActionResult> Edit(string Id)
+    public async Task<IActionResult> Update(string Id)
     {
         var model=await _manager.ContactService.GetByIdAsync(Id);   
         return View(model);
     }
     [HttpPost]
-    public async Task<IActionResult> EditAsync(UpdateContactDto contactDto)
+    public async Task<IActionResult> Update(UpdateContactDto contactDto)
     {
         await _manager.ContactService.UpdateAsync(contactDto);
         return RedirectToAction(nameof(Index));
     }
-    [HttpPost]
     public async Task<IActionResult> Delete(string Id)
     {
         await _manager.ContactService.DeleteAsync(Id);

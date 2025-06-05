@@ -1,0 +1,36 @@
+@model UpdateTestimonialDto
+@{
+    ViewData["Title"] = "Değerlendirme Güncelleme";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container top-entete mb-2">
+    <div class="d-flex justify-content-center">
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary" style="line-height:15px"><i class="fa-solid fa-plus me-2"></i>Değerlendirme İşlemi </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container formulaire mt-3">
+    <form method="post" encType="multipart/form-data">
+        <input type="hidden" asp-for="@Model.Id"/>
+        <input type="hidden" asp-for="@Model.ImageUrl"/>
+        <label class="form-label mb-2">Ad Soyad</label>
+        <input type="text" asp-for="@Model.FullName" class="form-control mb-3" placeholder="Hizmet adını Giriniz"/>
+        <label class="form-label mb-2">Yorum</label>
+        <textarea class="form-control mb-3" asp-for="@Model.Comment" placeholder="Yorum Yapınız" style="min-height:100px;"></textarea>
+        <label class="form-label mb-2">Ünvan</label>
+        <input type="text" asp-for="@Model.Title" class="form-control mb-3" placeholder="Ünvanı Giriniz"/>
+        <label class="form-label mb-2"> Kaç Yıldız?</label>
+        <input type="text" asp-for="@Model.Rate" placeholder="ex:4" required class="form-control mb-3" />
+        <label class="form-label mb-1">Resim</label>
+        <input type="file" asp-for="@Model.ImageFile" placeholder="Resim Yükleyiniz" class="form-control mb-3" />
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-success" type="submit">
+                <i class="fa-solid fa-edit me-1"></i>
+                Güncelle
+            </button>
+        </div>
+    </form>
+</div>

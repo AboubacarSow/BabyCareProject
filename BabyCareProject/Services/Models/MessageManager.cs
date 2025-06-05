@@ -26,7 +26,7 @@ public class MessageManager : IMessageService
     }
     public async Task DeleteAsync(string id)
     {
-        await _messageCollection.DeleteOneAsync(id);
+        await _messageCollection.DeleteOneAsync(ms => ms.Id==id);
     }
     public async Task<List<ResultMessageDto>> GetAllAsync()
     {
@@ -35,7 +35,7 @@ public class MessageManager : IMessageService
     }
     public async Task<UpdateMessageDto> GetByIdAsync(string id)
     {
-        var message = await _messageCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
+        var message = await _messageCollection.Find(ms => ms.Id == id).FirstOrDefaultAsync();
         return _mapper.Map<UpdateMessageDto>(message);
     }
     public async Task UpdateAsync(UpdateMessageDto messageDto)

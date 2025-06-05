@@ -3,7 +3,7 @@ using BabyCareProject.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareProject.Areas.Admin.Controllers;
-
+[Area("Admin")]
 public class ServiceController(IServiceManager manager): Controller
 {
     private readonly IServiceManager _manager = manager;
@@ -27,7 +27,6 @@ public class ServiceController(IServiceManager manager): Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
     public async Task<IActionResult> Delete(string id)
     {
         await _manager.HizmetService.DeleteAsync(id);

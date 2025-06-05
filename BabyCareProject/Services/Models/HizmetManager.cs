@@ -26,7 +26,7 @@ public class HizmetManager : IHizmetService
 
     public async Task DeleteAsync(string id)
     {
-        await _serviceCollection.DeleteOneAsync(id);    
+        await _serviceCollection.DeleteOneAsync(s => s.Id == id);    
     }
 
     public async Task<List<ResultServiceDto>> GetAllAsync()

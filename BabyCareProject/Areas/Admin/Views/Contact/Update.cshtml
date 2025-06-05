@@ -1,0 +1,35 @@
+@model UpdateContactDto
+@{
+    ViewData["Title"] = "İletişim Güncelleme";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="container top-entete mb-2">
+    <div class="d-flex justify-content-center">
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary" style="line-height:15px"><i class="fa-solid fa-plus me-2"></i>İletişim Güncelleme İşlemi </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container formulaire mt-3">
+    <form method="post">
+        <input type="hidden" asp-for="@Model.Id"/>
+        <label class="form-lable mb-1">Adres</label>
+        <input type="text" asp-for="@Model.Address" class="form-control" placeholder="Adres giriniz" required/>
+        <label class="form-label me-2">Mail</label>
+        <input type="mail" asp-for="@Model.Email" class="form-control" placeholder="Mail giriniz" required/>
+        <label class="form-label me-2">Tel Numara</label>
+        <input type="text" asp-for="@Model.Tel" class="form-control" placeholder="Telefon Numara Giriniz" required/>
+        <label class="form-label mb-1 mt-3">Konu</label>
+        <input type="text" asp-for="@Model.LocationUrl" class="form-control" placeholder="Konu giriniz" required/>
+        <label class="form-label mb-1 mt-3">Harita Linki</label>
+        <input type="text" asp-for="@Model.MapUrl" class="form-control" placeholder="Harita linki giriniz" required/>
+        <div class="d-flex justify-contect-center mt-3">
+            <button class="btn btn-success" type="submit">
+                <i class="fa-solid fa-edit me-2"></i> Güncelle
+            </button>
+        </div>
+    </form>
+</div>

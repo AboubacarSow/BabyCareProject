@@ -1,0 +1,151 @@
+@model List<ResultSubscriberDto>
+
+@{
+    ViewData["Title"]="Aboneler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count=0;
+    string identifiant = string.Empty;
+}
+
+<div class="container top-entete">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary" style="line-height:15px"><i class="fa-solid fa-list-ul me-4"></i>Aboneler </h4>
+        </div>
+    </div>
+</div>
+
+@if(Model.Count==0){
+    <div class="alert alert-info mt-3 text-center" role="alert">
+        <i class="fa-solid fa-circle-info me-3"></i>
+        <strong>Bilgilendirme!</strong> Henüz Abone Yoktur. 
+    </div>
+}
+else{
+    <div class=" mb-3 table-responsive tableau mt-3">
+        <table class="table table-stripped table-hover table-sm">
+            <thead class="rounded-3 tableau-header">
+                <tr>
+                    <th>N°</th>
+                    <th>Mail</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subscriber in Model)
+                {
+                    count++;
+                    <tr>
+                        <th>@count</th>
+                        <td class="text-primary" > @subscriber.Email</td>
+                        <td class="text-nowrap">
+              
+                                <a href="/Admin/Subscriber/Delete/@subscriber.Id" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash me-1"></i>
+                                    Sil
+                                </a>
+
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#mail-@subscriber.Id">
+                                    <i class="fa-regular fa-share-from-square"></i>
+                                    Mail Gönder
+                                </button>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @foreach (var mail in Model)
+    {
+        identifiant = mail.Id;
+        <div class="modal fade" id="mail-@mail.Id" tabindex="-1" aria-labelledby="mail-@mail.Id" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mail Gönderme</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" class="sendform" id="formulaire-@identifiant">
+                        <div class="modal-body">
+                            <input type="hidden" value="@mail.Email" id="email-@mail.Id" />
+                            <label class="form-label">Konu</label><br />
+                            <input id="subject-@mail.Id" type="text" placeholder="Konu giriniz" class="form-control" />
+                            <label class="form-label">Mesaj</label>
+                            <textarea class="form-control message" id="message-@mail.Id" placeholder="mesajınız yazınız"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-info text-light" data-bs-dismiss="modal">
+                                    <i class="fa-solid fa-paper-plane me-2"></i>
+                                    Gönder
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+   
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        document.getElementById('formulaire-@identifiant').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            const formData={
+                Body:document.getElementById('message-@identifiant').value,
+                Subject:document.getElementById('subject-@identifiant').value,
+                Email:document.getElementById('email-@identifiant').value
+            };
+                console.log("Sending:", formData); // Better logging
+
+            fetch("/Admin/Subscriber/SendEmail",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json"},
+            body:JSON.stringify(formData)
+            })
+            .then(async response=>{
+                      if (!response.ok) {
+                          const errortext=await response.text;
+                    throw new Error(`HTTP error! status: ${response.status} ${response.body} Text:${errortext}`);
+                 }
+                return response.json()
+            })
+            .then(data=>{
+                if(data.success){
+                        Swal.fire({
+                          position: "top-end",
+                          icon: "success",
+                          title: "Mesajınız başarıyla gönderildi!",
+                          showConfirmButton: false,
+                          timer: 1500});
+                }
+                else{
+                    Swal.fire({
+                      title: "İşlem Başarısız!",
+                      icon: "error",
+                      draggable: true
+                    });
+                }
+
+            }).catch( error=>{
+                        console.error('Something went wrong',error);
+                         Swal.fire({
+                             position:"top-center",
+                             title: "Error!",
+                             text: "Bir hata oluştu.",
+                             icon: "error",
+                             showConfirmButton: true,
+                             timer:1500
+                         });
+            })
+        })
+
+</script>

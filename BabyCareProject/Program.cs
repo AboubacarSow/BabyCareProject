@@ -1,4 +1,5 @@
 using BabyCareProject.Infrastructure.Extensions;
+using BabyCareProject.Infrastructure.Utilities;
 using BabyCareProject.Repositories.Settings;
 using Microsoft.Extensions.Options;
 using System.Reflection;
@@ -19,6 +20,8 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
         builder.Services.ConfigureServices();
+        builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.AddTransient<EmailService>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

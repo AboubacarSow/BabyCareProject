@@ -47,7 +47,8 @@ public class ProductManager : IProductService
 
     public async Task UpdateAsync(UpdateProductDto productDto)
     {
-        productDto.ImageUrl =await Media.UploadAsync(productDto.ImageFile);
+        if(productDto.ImageFile!=null)
+            productDto.ImageUrl =await Media.UploadAsync(productDto.ImageFile);             
         var product = _mapper.Map<Product>(productDto);
         await _productCollection.FindOneAndReplaceAsync(p=>p.Id==product.Id,product);
     }

@@ -24,10 +24,9 @@ public class ContactManager : IContactService
         var contact=_mapper.Map<Contact>(contactDto);
         await _contactCollection.InsertOneAsync(contact);
     }
-
     public async Task DeleteAsync(string id)
     {
-        await _contactCollection.DeleteOneAsync(id);
+        await _contactCollection.DeleteOneAsync(c=>c.Id==id);
     }
 
     public async Task<List<ResultContactDto>> GetAllAsync()

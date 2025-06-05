@@ -22,7 +22,6 @@ public class EventController(IServiceManager manager) : Controller
         await manager.EventService.CreateAsync(eventDto);
         return RedirectToAction("Index");   
     }
-    [HttpPost]
     public async Task<IActionResult> Delete(string id)
     {
         await manager.EventService.DeleteAsync(id);

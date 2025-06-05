@@ -29,7 +29,7 @@ namespace BabyCareProject.Services.Models
 
         public async Task DeleteAsync(string id)
         {
-            await _eventCollection.DeleteOneAsync(id);
+            await _eventCollection.DeleteOneAsync(c => c.Id == id);
         }
 
         public async Task<List<ResultEventDto>> GetAllAsync()
@@ -46,7 +46,8 @@ namespace BabyCareProject.Services.Models
 
         public async Task UpdateAsync(UpdateEventDto eventDto)
         {
-            eventDto.ImageUrl = await Media.UploadAsync(eventDto.ImageFile);
+            if(eventDto.ImageFile!=null)
+                eventDto.ImageUrl = await Media.UploadAsync(eventDto.ImageFile);
             var _event = _mapper.Map<Event>(eventDto);
             await _eventCollection.FindOneAndReplaceAsync(c => c.Id == _event.Id, _event);
 

@@ -28,7 +28,7 @@ public class SocialMediaManager : ISocialMediaService
 
     public async Task DeleteAsync(string id)
     {
-        await _socialMediaCollection.DeleteOneAsync(id);
+        await _socialMediaCollection.DeleteOneAsync(s => s.Id == id);
     }
 
     public async Task<List<ResultSocialMediaDto>> GetAllAsync()

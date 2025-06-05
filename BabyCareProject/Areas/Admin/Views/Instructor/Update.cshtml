@@ -13,6 +13,7 @@
 <div class="container formulaire mt-3">
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="@Model.Id" />
+        <input type="hidden" asp-for="@Model.ImageUrl" />
         <label class="form-label">Profil Resmi</label>
         <input type="file" asp-for="@Model.ImageFile" class="form-control"/>
         <br />

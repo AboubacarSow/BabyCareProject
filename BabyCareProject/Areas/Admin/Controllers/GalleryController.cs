@@ -26,7 +26,6 @@ public class GalleryController(IServiceManager manager) : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
     public async Task<IActionResult> Delete(string id)
     {
         await manager.GalleryService.DeleteAsync(id);

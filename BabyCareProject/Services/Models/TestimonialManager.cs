@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BabyCareProject.Dtos.SocialMediaDtos;
 using BabyCareProject.Dtos.TestimonialDtos;
 using BabyCareProject.Infrastructure.Utilities;
 using BabyCareProject.Repositories.Entities;
@@ -28,13 +29,27 @@ namespace BabyCareProject.Services.Models
         }
         public async Task DeleteAsync(string id)
         {
-            await _testimonialCollection.DeleteOneAsync(id);    
+            await _testimonialCollection.DeleteOneAsync(t=>t.Id==id);    
         }
         public async Task<List<ResultTestimonialDto>> GetAllAsync()
         {
 
             var testimonials = await _testimonialCollection.AsQueryable().ToListAsync();
             return _mapper.Map<List<ResultTestimonialDto>>(testimonials);   
+        }
+        public async Task<UpdateTestimonialDto> GetByIdAsync(string id)
+        {
+            var social = await _testimonialCollection.Find(s => s.Id == id).FirstOrDefaultAsync();
+            return _mapper.Map<UpdateTestimonialDto>(social);
+        }
+
+        public async Task UpdateAsync(UpdateTestimonialDto testimonialDto)
+        {
+            if (testimonialDto.ImageFile != null)
+                testimonialDto.ImageUrl = await Media.UploadAsync(testimonialDto.ImageFile);
+            var social = _mapper.Map<Testimonial>(testimonialDto);
+            await _testimonialCollection.FindOneAndReplaceAsync(s => s.Id == social.Id, social);
+
         }
     }
 }

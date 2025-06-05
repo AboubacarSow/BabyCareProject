@@ -49,7 +49,8 @@ public class InstructorManager : IInstructorService
 
     public async Task UpdateAsync(UpdateInstructorDto instructorDto)
     {
-        instructorDto.ImageUrl = await Media.UploadAsync(instructorDto.ImageFile);
+        if(instructorDto.ImageFile!=null)
+            instructorDto.ImageUrl = await Media.UploadAsync(instructorDto.ImageFile);
         var instructor = _mapper.Map<Instructor>(instructorDto);
         await _instructorCollection.FindOneAndReplaceAsync(i => i.Id.Equals(instructor.Id), instructor);
     }

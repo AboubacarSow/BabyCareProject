@@ -22,10 +22,11 @@ public class AboutController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateAboutDto createAboutDto)
     {
+        if (!ModelState.IsValid)
+            return View(createAboutDto);
         await _manager.AboutService.CreateAsync(createAboutDto);
         return RedirectToAction(nameof(Index));
     }
-    [HttpPost]
     public async Task<IActionResult> Delete(string id)
     {
         await _manager.AboutService.DeleteAsync(id);    

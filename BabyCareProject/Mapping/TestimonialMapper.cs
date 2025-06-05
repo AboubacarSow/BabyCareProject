@@ -9,6 +9,8 @@ namespace BabyCareProject.Mapping
         public TestimonialMapper()
         {
             CreateMap<Testimonial, ResultTestimonialDto>();
+            CreateMap<Testimonial, UpdateTestimonialDto>().ReverseMap();
+
             CreateMap<CreateTestimonialDto, Testimonial>();
         }
     }

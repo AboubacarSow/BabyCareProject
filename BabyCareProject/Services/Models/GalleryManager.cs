@@ -28,7 +28,7 @@ public class GalleryManager : IGalleryService
 
     public async Task DeleteAsync(string id)
     {
-        await _galleryCollection.DeleteOneAsync(id);
+        await _galleryCollection.DeleteOneAsync(c => c.Id == id);
     }
 
     public async Task<List<ResultGalleryDto>> GetAllAsync()
@@ -45,7 +45,8 @@ public class GalleryManager : IGalleryService
 
     public async Task UpdateAsync(UpdateGalleryDto galleryDto)
     {
-        galleryDto.ImageUrl = await Media.UploadAsync(galleryDto.ImageFile);
+        if(galleryDto.ImageFile!=null)
+            galleryDto.ImageUrl = await Media.UploadAsync(galleryDto.ImageFile);
         var gallery = _mapper.Map<Gallery>(galleryDto);
         await _galleryCollection.FindOneAndReplaceAsync(c => c.Id == gallery.Id, gallery);
 
