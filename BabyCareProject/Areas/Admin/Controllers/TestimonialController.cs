@@ -24,6 +24,8 @@ public class TestimonialController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateTestimonialDto testimonialDto)
     {
+        if(!ModelState.IsValid)
+            return View(testimonialDto);
         await _manager.TestimonialService.CreateAsync(testimonialDto);
         return RedirectToAction(nameof(Index));
     }
@@ -36,6 +38,8 @@ public class TestimonialController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateTestimonialDto testimonialDto)
     {
+        if(!ModelState.IsValid)
+            return View(testimonialDto);
         await _manager.TestimonialService.UpdateAsync(testimonialDto);
         return RedirectToAction(nameof(Index));
     }

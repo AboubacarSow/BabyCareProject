@@ -21,6 +21,8 @@ public class ContactController(IServiceManager _manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateContactDto contactDto)
     {
+        if(!ModelState.IsValid)
+            return View(contactDto);
         await _manager.ContactService.CreateAsync(contactDto);
         return RedirectToAction(nameof(Index));
     }
@@ -33,6 +35,8 @@ public class ContactController(IServiceManager _manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateContactDto contactDto)
     {
+        if(!ModelState.IsValid)
+            return View(contactDto);
         await _manager.ContactService.UpdateAsync(contactDto);
         return RedirectToAction(nameof(Index));
     }

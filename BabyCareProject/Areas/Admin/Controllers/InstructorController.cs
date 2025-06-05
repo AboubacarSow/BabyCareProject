@@ -23,6 +23,8 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateInstructorDto instructorDto)
         {
+            if(!ModelState.IsValid)
+                return View(instructorDto);
             await _manager.InstructorService.CreateAsync(instructorDto);
             return RedirectToAction("Index");
         }
@@ -37,6 +39,8 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateInstructorDto instructorDto)
         {
+            if(!ModelState.IsValid)
+                return View(instructorDto);
             await _manager.InstructorService.UpdateAsync(instructorDto);
             return RedirectToAction("Index");
         }

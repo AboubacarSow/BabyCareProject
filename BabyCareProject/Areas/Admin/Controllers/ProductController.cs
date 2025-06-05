@@ -29,6 +29,10 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProdutDto productDto)
         {
+            if(!ModelState.IsValid){
+                await GetTeachers();
+                return View(productDto);
+            }
             await _manager.ProductService.CreateAsync(productDto);
             return RedirectToAction("Index");
         }
@@ -42,6 +46,10 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(UpdateProductDto productDto)
         {
+            if(!ModelState.IsValid){
+                await GetTeachers();
+                return View(productDto);
+            }
             await _manager.ProductService.UpdateAsync(productDto);
             return RedirectToAction(nameof(Index));
         }

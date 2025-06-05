@@ -23,8 +23,10 @@
     <form method="post">
         <input type="hidden" asp-for="@Model.Id" />
         <input type="hidden" asp-for="@Model.VideoUrl" />
+        <span class="text-danger my-1" asp-validation-for="@Model.VideoUrl"></span>  
         <label class="form-label">Slogan</label>
-        <input type="text" asp-for="@Model.Slogan" class="form-control mb-3" placeholder="Slogan Giriniz" />    
+        <input type="text" asp-for="@Model.Slogan" class="form-control mb-3" placeholder="Slogan Giriniz" />
+        <span class="text-danger my-1" asp-validation-for="@Model.Slogan"></span>    
         <label class="form-label">Açıklama</label>
         <textarea class="form-control mb-3" 
                     asp-for="@Model.Description" placeholder="Açıklama Giriniz "

@@ -15,17 +15,7 @@ public class SubscriberController(IServiceManager manager,EmailService emailServ
         var models = await _manager.SubscriberService.GetAllAsync();
         return View(models);
     }
-    [HttpGet]
-    public IActionResult Create()
-    {
-        return View();
-    }
-    [HttpPost]
-    public async Task<IActionResult> Create(CreateSubscriberDto subscriberDto)
-    {
-        await _manager.SubscriberService.CreateAsync(subscriberDto);
-        return RedirectToAction(nameof(Index));
-    }
+    
     public async Task<IActionResult> Delete(string id)
     {
         await _manager.SubscriberService.DeleteAsync(id);

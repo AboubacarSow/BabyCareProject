@@ -22,6 +22,8 @@ public class GalleryController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateGalleryDto galleryDto)
     {
+        if(!ModelState.IsValid)
+            return View(galleryDto);
         await manager.GalleryService.CreateAsync(galleryDto);
         return RedirectToAction("Index");
     }
@@ -42,6 +44,8 @@ public class GalleryController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateGalleryDto galleryDto)
     {
+        if(!ModelState.IsValid)
+            return View(galleryDto);
         await manager.GalleryService.UpdateAsync(galleryDto);
         return RedirectToAction(nameof(Index));
     }

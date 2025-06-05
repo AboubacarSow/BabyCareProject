@@ -41,6 +41,8 @@ public class AboutController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateAboutDto aboutDto)
     {
+        if (!ModelState.IsValid)
+            return View(aboutDto);
         await _manager.AboutService.UpdateAsync(aboutDto);
         return RedirectToAction($"{nameof(Index)}");
     }

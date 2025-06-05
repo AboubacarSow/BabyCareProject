@@ -19,6 +19,8 @@ public class EventController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateEventDto eventDto)
     {
+        if(!ModelState.IsValid)
+            return View(eventDto);
         await manager.EventService.CreateAsync(eventDto);
         return RedirectToAction("Index");   
     }
@@ -36,6 +38,8 @@ public class EventController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateEventDto eventDto)
     {
+        if(!ModelState.IsValid)
+            return View(eventDto);
         await manager.EventService.UpdateAsync(eventDto);
         return RedirectToAction(nameof(Index)); 
     }

@@ -23,6 +23,8 @@ public class SocialMediaController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateSocialMediaDto socialMediaDto)
     {
+        if(!ModelState.IsValid)
+            return View(socialMediaDto);
         await _manager.SocialMediaService.CreateAsync(socialMediaDto);
         return RedirectToAction("Index");
     }
@@ -43,6 +45,8 @@ public class SocialMediaController(IServiceManager manager) : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateSocialMediaDto socialMediaDto)
     {
+        if(!ModelState.IsValid)
+            return View(socialMediaDto);
         await _manager.SocialMediaService.UpdateAsync(socialMediaDto);
         return RedirectToAction(nameof(Index));
     }

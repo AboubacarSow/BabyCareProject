@@ -17,10 +17,13 @@
         <input type="hidden" asp-for="@Model.Id"/> 
         <label class="form-label mb-2">Hizmet Ad</label>
         <input type="text" asp-for="@Model.Name" class="form-control mb-3" placeholder="Hizmet adını Giriniz"/>
+        <span class="text-danger my-1" asp-validation-for="@Model.Name"></span>
         <label class="form-label mb-2">Açıklama</label>
         <textarea class="form-control mb-3" asp-for="@Model.Description" placeholder="Açıklama Giriniz " style="min-height:100px;"></textarea>
+        <span class="text-danger my-1" asp-validation-for="@Model.Description"></span>
         <label class="form-label mb-2">İkon</label>
         <input type="text" asp-for="@Model.Icon" class="form-control mb-3" placeholder="Ikon Giriniz"/>
+        <span class="text-danger my-1" asp-validation-for="@Model.Icon"></span>
         <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-success" type="submit">
                 <i class="fa-solid fa-edit me-1"></i>

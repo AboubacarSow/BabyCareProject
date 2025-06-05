@@ -20,7 +20,7 @@ public class Program
         //AddFluentValidationAutoValidation
         builder.Services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()
-            .AddValidatorsFromAssemblyContaining<Program>();
+            .AddValidatorsFromAssemblyContaining<AssemblyReference>();
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
