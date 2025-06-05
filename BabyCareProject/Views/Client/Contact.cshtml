@@ -13,7 +13,7 @@
             </div>
             <div class="row g-5 mb-5">
                 <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-flex w-100 border border-primary p-4 rounded bg-white">
+                    <div class="d-flex w-100 border border-primary p-4 rounded bg-white text-nowrap">
                         <a href="@Model.LocationUrl" target="_blank">
                             <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
                             <div class="">
@@ -45,9 +45,9 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <form method="post" id="sendMessage">
-                        <input type="text" id="name" class="w-100 form-control py-3 mb-5 border-primary" placeholder="Ad Soyad">
+                        <input type="text" id="userName" class="w-100 form-control py-3 mb-5 border-primary" placeholder="Ad Soyad">
                         <input type="email" id="mail" class="w-100 form-control py-3 mb-5 border-primary" placeholder="Mailiniz">
-                        <textarea class="w-100 id="message" form-control mb-5 border-primary" rows="8" cols="10" placeholder="Mesajınız Giriniz"></textarea>
+                        <textarea class="w-100  form-control mb-5 border-primary p-2" id="message" rows="8" cols="10" placeholder="Mesajınız Giriniz"></textarea>
                         <button class="w-100 btn btn-primary form-control py-3 border-primary text-white bg-primary" type="submit">Gönder</button>
                     </form>
                 </div>
@@ -66,17 +66,17 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    const name=document.getElementById("name").value;
-    const email=document.getElementById("mail").value;
-    const message=document.getElementById("message").value;
     document.addEventListener("submit",function(event){
+         let userFullName=document.getElementById("userName").value;
+         let email=document.getElementById("mail").value;
+         let message=document.getElementById("message").value;
         event.preventDefault();
         let formData={
-            FullName:name,
+            FullName:userFullName,
             Email:email,
             Body:message
         };
-        let url="/Client/SendMessge";
+        let url="/Client/SendMessage";
         fetch(url,
             {
                 method:"POST",
@@ -84,7 +84,7 @@
                 {
                     "Content-Type": "application/json",
                     "Accept":"application/json"
-                }
+                },
                 body:JSON.stringify(formData)
             }
         ).then(Response=>response.json())
@@ -101,9 +101,9 @@
                               timer: 1500
                         })
                         .then(()=>{
-                            name="";
-                            email="";
-                            message=""
+                               document.getElementById("userName").value = "";
+                                document.getElementById("mail").value = "";
+                                document.getElementById("message").value = "";
                             window.location.reload();
                         });
                 }

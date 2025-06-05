@@ -64,7 +64,7 @@ public class ClientController(IServiceManager serviceManager) : Controller
         return View(events);
     }
     [HttpPost]
-    public async Task<IActionResult> SendMessge([FromBody]CreateMessageDto messageDto)
+    public async Task<IActionResult> SendMessage([FromBody]CreateMessageDto messageDto)
     {
         try
         {
