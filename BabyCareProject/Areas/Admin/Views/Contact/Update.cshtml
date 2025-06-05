@@ -18,19 +18,19 @@
         <input type="hidden" asp-for="@Model.Id"/>
         <label class="form-lable mb-1">Adres</label>
         <input type="text" asp-for="@Model.Address" class="form-control" placeholder="Adres giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Address"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Address"></span>  <br />
         <label class="form-label me-2">Mail</label>
         <input type="mail" asp-for="@Model.Email" class="form-control" placeholder="Mail giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Email"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Email"></span><br />
         <label class="form-label me-2">Tel Numara</label>
         <input type="text" asp-for="@Model.Tel" class="form-control" placeholder="Telefon Numara Giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Tel"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Tel"></span>  <br />
         <label class="form-label mb-1 mt-3">Konu</label>
         <input type="text" asp-for="@Model.LocationUrl" class="form-control" placeholder="Konu giriniz"/>
-        <span class="text-danger my-1" asp-validation-for="@Model.LocationUrl"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.LocationUrl"></span><br />
         <label class="form-label mb-1 mt-3">Harita Linki</label>
         <input type="text" asp-for="@Model.MapUrl" class="form-control" placeholder="Harita linki giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.MapUrl"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.MapUrl"></span>  <br />
         <div class="d-flex justify-contect-center mt-3">
             <button class="btn btn-success" type="submit">
                 <i class="fa-solid fa-edit me-2"></i> Güncelle

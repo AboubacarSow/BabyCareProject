@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<!-- Hero Start -->
+  <partial name="_HeroComponent" />
+<!-- Hero End -->
+<!-- About Start -->
+     @await Component.InvokeAsync("About")
+<!-- About End -->
+<!-- Service Start -->
+    @await Component.InvokeAsync("Service")
+<!-- Service End -->
+<!-- Programs Start -->
+     @await Component.InvokeAsync("Course")
+<!-- Program End -->
+<!-- Events Start -->
+    @await Component.InvokeAsync("Event")
+<!-- Events End-->
+<!-- Team Start-->
+    @await Component.InvokeAsync("Team")
+<!-- Team End-->
+<!-- Testimonial Start -->
+    @await Component.InvokeAsync("Testimonial")
+<!-- Testimonial End -->
+

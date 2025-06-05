@@ -17,17 +17,18 @@
         <label class="form-label mb-2">Slogan</label>
         <input type="text" asp-for="@Model.Slogan" class="form-control mb-3" placeholder="Slogan Giriniz"/>
         @Html.ValidationMessageFor(a=>a.Slogan,"", new{@class="text-danger my-1"})
+        <br />
         <label class="form-label mb-2">Açıklama</label>
         <textarea class="form-control mb-3" asp-for="@Model.Description" placeholder="Açıklama Giriniz " style="min-height:100px;"></textarea>
-        <span class="text-danger my-1" asp-validation-for="@Model.Description"></span>
+        <span class="text-danger my-1" asp-validation-for="@Model.Description"></span><br />
         <label class="form-label mb-2">Video ID'isi</label>
         <input type="text" asp-for="@Model.VideoID" class="form-control mb-3" placeholder="Video ID Giriniz"/>
-        <span class="text-danger my-1" asp-validation-for="@Model.VideoID"></span>
+        <span class="text-danger my-1" asp-validation-for="@Model.VideoID"></span><br />
         <label class="form-label mb-2">Özellikler</label>
         <textarea asp-for="@Model.FeatureContent" class="form-control me-2" 
             placeholder="Özellik 1,Özellik 2,Özellik 3,..." style="min-height:80px;">
         </textarea>
-        <span class="text-danger my-1" asp-validation-for="@Model.FeatureContent"></span>
+        <span class="text-danger my-1" asp-validation-for="@Model.FeatureContent"></span><br />
         <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-primary" type="submit">
                 <i class="fa-solid fa-plus me-1"></i>

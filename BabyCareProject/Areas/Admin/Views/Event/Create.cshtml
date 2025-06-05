@@ -17,25 +17,25 @@
     <form method="post" enctype="multipart/form-data">
         <label class="form-lable mb-1">Adı</label>
         <input type="text" asp-for="@Model.Name" class="form-control" placeholder="Etkinlik Adını giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Name"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Name"></span> <br />
         <label class="form-label me-1 mt-3">Yeri</label>
         <input type="mail" asp-for="@Model.Location" class="form-control" placeholder="Etkinlik Nerede olacağını giriniz" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Location"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Location"></span>  <br />
         <label class="form-label me-1 mt-3">Görsel</label>
         <input type="file" asp-for="@Model.ImageFile" class="form-control" placeholder="Görsel Yükleyin " />
-        <span class="text-danger my-1" asp-validation-for="@Model.ImageFile"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.ImageFile"></span> <br />
         <label class="form-label mb-1 mt-3">Tarih</label>
         <input type="text" asp-for="@Model.Date" class="form-control" placeholder="29 Ocak 1999" />
-        <span class="text-danger my-1" asp-validation-for="@Model.Date"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.Date"></span>  <br />
         <label class="form-label mb-1 mt-3">Başlangıç Saat</label>
         <input type="text" asp-for="@Model.StartAt" class="form-control" placeholder="00:00 AM/PM" />
-        <span class="text-danger my-1" asp-validation-for="@Model.StartAt"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.StartAt"></span><br />
         <label class="form-label mb-1 mt-3">Bitiş Saat</label>
         <input type="text" asp-for="@Model.EndAt" class="form-control" placeholder="00:00 AM/PM"/>
-        <span class="text-danger my-1" asp-validation-for="@Model.EndAt"></span>  
+        <span class="text-danger my-1" asp-validation-for="@Model.EndAt"></span> <br />
         <label class="form-label mb-1 mt-3">Etkinlik Hakkında</label>
         <textarea asp-for="@Model.Description" class="form-control" style="min-height:100px;" placeholder="Etkinlik Hakkında Bilgi Giriniz" ></textarea> 
-        <span class="text-danger my-1" asp-validation-for="@Model.Description"></span>     
+        <span class="text-danger my-1" asp-validation-for="@Model.Description"></span> <br />
         <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-primary" type="submit">
                 <i class="fa-solid fa-plus me-2"></i> Kaydet

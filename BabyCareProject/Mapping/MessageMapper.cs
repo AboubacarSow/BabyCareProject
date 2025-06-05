@@ -9,7 +9,6 @@ namespace BabyCareProject.Mapping
         public MessageMapper()
         {
             CreateMap<Message, ResultMessageDto>();
-            CreateMap<Message, UpdateMessageDto>().ReverseMap();
             CreateMap<CreateMessageDto, Message>();
         }
     }

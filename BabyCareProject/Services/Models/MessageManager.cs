@@ -33,14 +33,5 @@ public class MessageManager : IMessageService
         var messages = await _messageCollection.AsQueryable().ToListAsync();
         return _mapper.Map<List<ResultMessageDto>>(messages);
     }
-    public async Task<UpdateMessageDto> GetByIdAsync(string id)
-    {
-        var message = await _messageCollection.Find(ms => ms.Id == id).FirstOrDefaultAsync();
-        return _mapper.Map<UpdateMessageDto>(message);
-    }
-    public async Task UpdateAsync(UpdateMessageDto messageDto)
-    {
-        var message = _mapper.Map<Message>(messageDto);
-        await _messageCollection.FindOneAndReplaceAsync(s => s.Id == message.Id, message);
-    }
+    
 }
