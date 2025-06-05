@@ -3,6 +3,8 @@ using BabyCareProject.Infrastructure.Utilities;
 using BabyCareProject.Repositories.Settings;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace BabyCareProject;
 public class Program
@@ -15,13 +17,19 @@ public class Program
         {
             return provider.GetRequiredService<IOptions<DataBaseSettings>>().Value;
         });
-
+        //AddFluentValidationAutoValidation
+        builder.Services.AddFluentValidationAutoValidation()
+            .AddFluentValidationClientsideAdapters()
+            .AddValidatorsFromAssemblyContaining<Program>();
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
         builder.Services.ConfigureServices();
         builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
         builder.Services.AddTransient<EmailService>();
+
+
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

@@ -22,6 +22,7 @@
 <div class="container formulaire mt-3 content">
     <form method="post">
         <input type="hidden" asp-for="@Model.Id" />
+        <input type="hidden" asp-for="@Model.VideoUrl" />
         <label class="form-label">Slogan</label>
         <input type="text" asp-for="@Model.Slogan" class="form-control mb-3" placeholder="Slogan Giriniz" />    
         <label class="form-label">Açıklama</label>
