@@ -21,6 +21,10 @@ The project is built using service-oriented architecture. This approach allowed 
 
 #### DataBase : MongoDB
 
+#### Some Key features:
+- **Sending Real Email**
+- **Making a subscription**
+
 ##### Here is quiet view that show how its looks like
 
 -**Managment Side**
