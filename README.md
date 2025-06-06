@@ -39,7 +39,7 @@ The project is built using service-oriented architecture. This approach allowed 
 ### Messages
 ![Messages](src/message.PNG)
 ### Subscribers
-![subscribers](src/subscriber.PNG)
+![subscribers](src/subscribe.PNG)
 ### Testimonials
 ![testimonial](src/testimonial.PNG)
 ### Galleries
