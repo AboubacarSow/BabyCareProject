@@ -1,0 +1,174 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container top-entete mb-4">
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary text-center" style="line-height:15px">
+                <i class="fa-solid fa-gauge"></i>
+                Dashboard 
+            </h4>
+        </div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card bg-primary border-none"
+             style=" border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-white fs-4 fw-bold"> <span>Toplam</span> <br />Eğitmen</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5 class="text-danger">
+                            <i class="fa-solid fa-chalkboard-user me-1"></i>
+                            +@Model.TotalTeachers
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Instructor/Index" class="text-danger">
+                        <<     Eğitmenler
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="card bg-info border-none"
+             style=" border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-light fs-4 fw-bold"> <span>Toplam</span> <br/>  Kurs</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5>
+                            <i class="fa-brands fa-discourse me-1"></i>                            
+                            +@Model.TotalCourses
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Product/Index" class="text-dark u" >
+                        << Kurslar
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="card bg-warning border-none"
+             style=" border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-white fs-4"> <span>Toplam</span> <br/> Etkinlik</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5 class="text-primary">
+                            <i class="fa-solid fa-calendar-days me-1"></i>
+                            +@Model.TotalEvents
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Event/Index" >
+                        << Etkinlikler
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card border-none" 
+        style="background-color:#ffffff; border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-primary fs-4 fw-bold"> <span>Toplam</span> <br/> Kullanıcı</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5 class="text-danger">
+                            <i class="fa-solid fa-users me-1"></i>
+                            +@Model.TotalSubscribers
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Subscriber/Index" class="text-danger" >
+                        << Aboneler
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="card border-none" 
+         style="background-color:#ffffff; border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-primary fs-4 fw-bold"> <span>Toplam</span> <br/> Rating</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5>
+                            <i class="fa-solid fa-star me-1"></i>
+                            +@Model.TotalRating
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Testimonial/Index" class="text-dark" >
+                        << Değerlendirmeler
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="card border-none" 
+         style="background-color:#ffffff; border:none; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="text-warning fs-4"> <span class="text-nowrap">Toplam Gelen</span> <br /> Mesajlar</h4>
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h5 class="">
+                            <i class="fa-solid fa-message me-1"></i>
+                            +@Model.TotalMessageReceived
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-light">
+                    <a href="/Admin/Message/Index" >
+                        << Gelen Mesajlar
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+

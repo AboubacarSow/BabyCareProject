@@ -1,6 +1,4 @@
-﻿using BabyCareProject.Dtos.AboutDtos;
-using BabyCareProject.Dtos.SocialMediaDtos;
-using BabyCareProject.Dtos.TestimonialDtos;
+﻿using BabyCareProject.Dtos.TestimonialDtos;
 
 namespace BabyCareProject.Services.Contracts
 {

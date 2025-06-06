@@ -13,5 +13,4 @@ public class Instructor
     public string LastName { get; set; }
     public string ImageUrl { get; set; }
     public string Title { get; set; }
-    public List<SocialMedia> SocialMedia { get; set; } = new List<SocialMedia>();
 }

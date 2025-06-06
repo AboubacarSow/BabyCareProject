@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BabyCareProject.Dtos.SocialMediaDtos;
 using BabyCareProject.Dtos.SubscriberDtos;
 using BabyCareProject.Repositories.Entities;
 using BabyCareProject.Repositories.Settings;

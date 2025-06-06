@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareProject.Areas.Admin.Controllers;
 
+
 [Area("Admin")]
 public class AboutController(IServiceManager manager) : Controller
 {

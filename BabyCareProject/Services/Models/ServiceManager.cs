@@ -11,7 +11,6 @@ public class ServiceManager : IServiceManager
     private readonly IMessageService _messageService;
     private readonly IProductService _productService;
     private readonly IHizmetService _hizmetService;
-    private readonly ISocialMediaService _socialMediaService;
     private readonly ISubscriberService _subscriberService;
     private readonly ITestimonialService _testimonialService;
 
@@ -19,7 +18,7 @@ public class ServiceManager : IServiceManager
         IEventService eventService, IGalleryService galleryService,
         IInstructorService instructorService, IMessageService messageService,
         IProductService productService, IHizmetService hizmetService,
-        ISocialMediaService socialMediaService, ISubscriberService subscriberService,
+       ISubscriberService subscriberService,
         ITestimonialService testimonialService)
     {
         _aboutService = aboutService;
@@ -30,7 +29,6 @@ public class ServiceManager : IServiceManager
         _messageService = messageService;
         _productService = productService;
         _hizmetService = hizmetService;
-        _socialMediaService = socialMediaService;
         _subscriberService = subscriberService;
         _testimonialService = testimonialService;
     }
@@ -42,7 +40,6 @@ public class ServiceManager : IServiceManager
     public IMessageService MessageService => _messageService;
     public IProductService ProductService => _productService;
     public IHizmetService HizmetService => _hizmetService;
-    public ISocialMediaService SocialMediaService => _socialMediaService;
     public ISubscriberService SubscriberService => _subscriberService;
     public ITestimonialService TestimonialService => _testimonialService;
 }

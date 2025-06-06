@@ -10,7 +10,6 @@ public interface IServiceManager
     IMessageService MessageService { get; }
     IProductService ProductService { get; }
     IHizmetService HizmetService {  get; }
-    ISocialMediaService SocialMediaService { get; }
     ISubscriberService SubscriberService { get; }
     ITestimonialService TestimonialService { get; }
 }

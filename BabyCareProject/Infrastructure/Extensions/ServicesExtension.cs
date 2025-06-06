@@ -16,7 +16,6 @@ public static class ServicesExtension
         services.AddScoped<IMessageService, MessageManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IServiceManager, ServiceManager>();
-        services.AddScoped<ISocialMediaService, SocialMediaManager>();
         services.AddScoped<ISubscriberService, SubscriberManager>();
         services.AddScoped<ITestimonialService, TestimonialManager>();
     }
